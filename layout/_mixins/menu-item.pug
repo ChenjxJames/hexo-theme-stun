@@ -5,6 +5,7 @@ mixin menuItem(menu, className)
         var item = value.split('||');
         var menuPath = item[0] ? item[0].trim() : '/';
         var menuIcon = item[1] ? item[1].trim() : false;
+        var menuName = item[2] ? item[2].trim() : false;
         var hasSubMenu = menuPath.toLowerCase() === 'javascript:;';
         var aTagAttr = {};
         if (hasSubMenu) aTagAttr.onclick = 'return false;';
@@ -18,7 +19,7 @@ mixin menuItem(menu, className)
             span(class=`header-nav-${className || ''}menu-item__icon`)
               i(class=menuIcon)
           if !theme.menu_settings.icon_only
-            span(class=`header-nav-${className || ''}menu-item__text`)= __(`menu.${name}`)
+            span(class=`header-nav-${className || ''}menu-item__text`)= menuName ? menuName : __(`menu.${name}`)
         if hasSubMenu
           div.header-nav-submenu
             +menuItem(theme.submenu[name], 'sub')
